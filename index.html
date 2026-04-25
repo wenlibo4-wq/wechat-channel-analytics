@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>视频号数据分析工具</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">视</div>
+          <div>
+            <h1>视频号数据分析</h1>
+            <p>内容表现、增长趋势与运营建议</p>
+          </div>
+        </div>
+
+        <section class="panel upload-panel">
+          <h2>导入数据</h2>
+          <label class="file-drop" for="csvFile">
+            <span class="file-icon">CSV</span>
+            <strong>上传导出的 CSV</strong>
+            <small>字段可包含：标题、发布时间、播放量、点赞、评论、转发、收藏、完播率、新增关注</small>
+          </label>
+          <input id="csvFile" type="file" accept=".csv,text/csv" />
+          <button id="sampleBtn" class="primary-btn" type="button">载入示例数据</button>
+          <button id="clearBtn" class="ghost-btn" type="button">清空数据</button>
+        </section>
+
+        <section class="panel schema-panel">
+          <h2>字段识别</h2>
+          <p>支持中英文表头，会自动匹配常见别名，例如 views/play、likes/点赞、completion/完播率。</p>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Wechat Channels Analytics</p>
+            <h2>视频内容表现看板</h2>
+          </div>
+          <div class="controls">
+            <label>
+              时间范围
+              <select id="rangeSelect">
+                <option value="all">全部</option>
+                <option value="7">近 7 天</option>
+                <option value="30" selected>近 30 天</option>
+                <option value="90">近 90 天</option>
+              </select>
+            </label>
+            <label>
+              分析口径
+              <select id="metricSelect">
+                <option value="views">播放量</option>
+                <option value="engagementRate">互动率</option>
+                <option value="followRate">转粉率</option>
+                <option value="completionRate">完播率</option>
+              </select>
+            </label>
+          </div>
+        </header>
+
+        <section id="emptyState" class="empty-state">
+          <div>
+            <h2>先放一份视频号数据进来</h2>
+            <p>上传 CSV 或载入示例数据后，这里会生成趋势、排行、时段表现和可执行建议。</p>
+          </div>
+        </section>
+
+        <section id="dashboard" class="dashboard is-hidden">
+          <div class="kpi-grid" id="kpiGrid"></div>
+
+          <section class="analysis-grid">
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <h3>趋势分析</h3>
+                <span id="trendLabel"></span>
+              </div>
+              <canvas id="trendChart" width="960" height="360"></canvas>
+            </article>
+
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <h3>发布时段</h3>
+                <span>按小时聚合</span>
+              </div>
+              <canvas id="hourChart" width="960" height="360"></canvas>
+            </article>
+          </section>
+
+          <section class="content-grid">
+            <article class="panel">
+              <div class="panel-head">
+                <h3>爆款内容排行</h3>
+                <span>综合播放与互动</span>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>标题</th>
+                      <th>播放</th>
+                      <th>互动率</th>
+                      <th>完播率</th>
+                      <th>转粉</th>
+                    </tr>
+                  </thead>
+                  <tbody id="topRows"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h3>运营建议</h3>
+                <span>基于当前数据</span>
+              </div>
+              <div id="insights" class="insights"></div>
+            </article>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
