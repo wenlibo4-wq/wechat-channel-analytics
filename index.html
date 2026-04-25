@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>视频号数据分析工具</title>
+    <title>wendy 视频号数据顾问</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app-shell">
       <aside class="sidebar">
         <div class="brand">
-          <div class="brand-mark">视</div>
+          <div class="brand-mark"></div>
           <div>
-            <h1>视频号数据分析</h1>
-            <p>内容表现、增长趋势与运营建议</p>
+            <h1>wendy</h1>
+            <p>视频号数据顾问</p>
+            <small>用数据陪伴你的成长</small>
           </div>
         </div>
 
@@ -22,24 +23,36 @@
           <label class="file-drop" for="csvFile">
             <span class="file-icon">CSV</span>
             <strong>上传导出的 CSV</strong>
-            <small>字段可包含：标题、发布时间、播放量、点赞、评论、转发、收藏、完播率、新增关注</small>
+            <small>字段可包含：作品标题、发布时间、播放、心、赞、评论、分享、关注、完播率、平均播放时长</small>
           </label>
           <input id="csvFile" type="file" accept=".csv,text/csv" />
           <button id="sampleBtn" class="primary-btn" type="button">载入示例数据</button>
           <button id="clearBtn" class="ghost-btn" type="button">清空数据</button>
         </section>
 
+        <nav class="side-menu" aria-label="功能导航">
+          <a href="#dashboard">数据看板</a>
+          <a href="#insights">内容分析</a>
+          <a href="#trendChart">趋势分析</a>
+          <a href="#topRows">作品列表</a>
+          <a href="#insights">运营建议</a>
+          <a href="#csvFile">数据导出</a>
+          <a href="#emptyState">使用指南</a>
+        </nav>
+
         <section class="panel schema-panel">
           <h2>字段识别</h2>
-          <p>支持中英文表头，会自动匹配常见别名，例如 views/play、likes/点赞、completion/完播率。</p>
+          <p>支持视频号后台单篇视频 CSV 常见表头，例如播放/play、心/heart、赞/like、completionRate/完播率。</p>
         </section>
       </aside>
 
       <section class="workspace">
         <header class="topbar">
-          <div>
-            <p class="eyebrow">Wechat Channels Analytics</p>
-            <h2>视频内容表现看板</h2>
+          <div class="top-intro">
+            <p class="eyebrow">Hi, wendy 👋</p>
+            <h2>视频数据看板</h2>
+            <p>用数据看见内容的价值，陪你一起稳稳成长</p>
+            <strong>今天也要加油呀！你比自己想象的更有力量。</strong>
           </div>
           <div class="controls">
             <label>
@@ -55,9 +68,10 @@
               分析口径
               <select id="metricSelect">
                 <option value="views">播放量</option>
-                <option value="engagementRate">互动率</option>
-                <option value="followRate">转粉率</option>
                 <option value="completionRate">完播率</option>
+                <option value="avgWatchTime">平均播放时长</option>
+                <option value="engagementRate">互动率</option>
+                <option value="followRate">关注转化率</option>
               </select>
             </label>
           </div>
@@ -66,7 +80,7 @@
         <section id="emptyState" class="empty-state">
           <div>
             <h2>先放一份视频号数据进来</h2>
-            <p>上传 CSV 或载入示例数据后，这里会生成趋势、排行、时段表现和可执行建议。</p>
+            <p>上传视频号后台导出的单篇视频 CSV，或载入示例数据后，这里会生成指标、排行、时段表现和复盘建议。</p>
           </div>
         </section>
 
@@ -76,7 +90,7 @@
           <section class="analysis-grid">
             <article class="panel chart-panel">
               <div class="panel-head">
-                <h3>趋势分析</h3>
+                <h3>🌿 趋势分析</h3>
                 <span id="trendLabel"></span>
               </div>
               <canvas id="trendChart" width="960" height="360"></canvas>
@@ -84,7 +98,7 @@
 
             <article class="panel chart-panel">
               <div class="panel-head">
-                <h3>发布时段</h3>
+                <h3>🌱 发布时间分布</h3>
                 <span>按小时聚合</span>
               </div>
               <canvas id="hourChart" width="960" height="360"></canvas>
@@ -94,18 +108,27 @@
           <section class="content-grid">
             <article class="panel">
               <div class="panel-head">
-                <h3>爆款内容排行</h3>
-                <span>综合播放与互动</span>
+                <h3>单篇视频排行</h3>
+                <span>按播放表现排序</span>
               </div>
               <div class="table-wrap">
                 <table>
                   <thead>
                     <tr>
                       <th>标题</th>
+                      <th>发布时间</th>
                       <th>播放</th>
-                      <th>互动率</th>
                       <th>完播率</th>
-                      <th>转粉</th>
+                      <th>平均播放时长</th>
+                      <th>心</th>
+                      <th>赞</th>
+                      <th>评论</th>
+                      <th>分享</th>
+                      <th>关注</th>
+                      <th>转发聊天和朋友圈</th>
+                      <th>设为铃声</th>
+                      <th>设为状态</th>
+                      <th>设为朋友圈封面</th>
                     </tr>
                   </thead>
                   <tbody id="topRows"></tbody>

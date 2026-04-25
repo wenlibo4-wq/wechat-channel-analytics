@@ -319,13 +319,13 @@ function renderInsights(data) {
       "good",
     ),
     insightSection(
-      "B. 下一条视频具体怎么拍",
+      "B. 下一条视频建议怎么拍",
       `围绕《${shortTitle(nextItem.title)}》继续拍，但不要只换标题。先复用有效钩子，再把内容承接做扎实。`,
       nextBullets,
       "good",
     ),
     insightSection(
-      "C. 需要避免的内容问题",
+      "C. 需要避免的问题",
       `重点避开《${shortTitle(avoidItem.title)}》暴露的问题：${avoidItem.diagnosis.label}。播放 ${formatNumber(avoidItem.views)}，完播率 ${formatPercent(avoidItem.completionRate)}。`,
       avoidBullets,
       "warn",
@@ -549,8 +549,8 @@ function renderLineChart(canvas, points, metric) {
   trendLabel.textContent = metricName(metric);
   const values = points.map((point) => point[metric] || 0);
   drawChart(canvas, points.map((point) => point.label), values, {
-    color: "#2563eb",
-    fill: "rgba(37, 99, 235, 0.12)",
+    color: "#70B88A",
+    fill: "rgba(112, 184, 138, 0.14)",
     formatter: metric === "avgWatchTime" ? formatDuration : metric.includes("Rate") ? formatPercent : formatNumber,
     line: true,
   });
@@ -558,8 +558,8 @@ function renderLineChart(canvas, points, metric) {
 
 function renderBarChart(canvas, points) {
   drawChart(canvas, points.map((point) => point.label), points.map((point) => point.views), {
-    color: "#0f9f7a",
-    fill: "rgba(15, 159, 122, 0.16)",
+    color: "#3F8F63",
+    fill: "rgba(112, 184, 138, 0.18)",
     formatter: formatNumber,
     line: false,
   });
